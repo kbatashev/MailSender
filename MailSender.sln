@@ -3,11 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSender", "MailSender\MailSender.csproj", "{5F540203-6F7B-41BD-8664-F1E7FEB0ACB4}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C5122FF1-9F54-49BA-B0BA-4B891942DE71}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTests", "ConsoleTests\ConsoleTests.csproj", "{4FBE59AA-42C9-4E61-A923-41BE6D492D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSender", "Tests\WPFTests\MailSender.csproj", "{194BCE8C-05D7-4D1A-AFE2-08771FECEF2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,20 +11,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5F540203-6F7B-41BD-8664-F1E7FEB0ACB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F540203-6F7B-41BD-8664-F1E7FEB0ACB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F540203-6F7B-41BD-8664-F1E7FEB0ACB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F540203-6F7B-41BD-8664-F1E7FEB0ACB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FBE59AA-42C9-4E61-A923-41BE6D492D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FBE59AA-42C9-4E61-A923-41BE6D492D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FBE59AA-42C9-4E61-A923-41BE6D492D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FBE59AA-42C9-4E61-A923-41BE6D492D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{194BCE8C-05D7-4D1A-AFE2-08771FECEF2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{194BCE8C-05D7-4D1A-AFE2-08771FECEF2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{194BCE8C-05D7-4D1A-AFE2-08771FECEF2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{194BCE8C-05D7-4D1A-AFE2-08771FECEF2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{4FBE59AA-42C9-4E61-A923-41BE6D492D2F} = {C5122FF1-9F54-49BA-B0BA-4B891942DE71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3ED6224C-27EC-43F5-B1D5-8F97136EA78D}
