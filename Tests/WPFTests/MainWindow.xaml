@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
-        xmlns:data="clr-namespace:MailSender.Lib.Data;assembly=MailSender.Lib"
-        xmlns:entities="clr-namespace:MailSender.Lib.Entities;assembly=MailSender.Lib"
+        xmlns:data="clr-namespace:MailSender.Lib.Data"
+        xmlns:entities="clr-namespace:MailSender.Lib.Entities"
         mc:Ignorable="d"
         Title="WpfMailSender" Height="450" Width="800">
     <d:Window.DataContext>

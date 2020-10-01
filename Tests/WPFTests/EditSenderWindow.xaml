@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
-        xmlns:entities="clr-namespace:MailSender.Lib.Entities;assembly=MailSender.Lib"
+        xmlns:entities="clr-namespace:MailSender.Lib.Entities"
         mc:Ignorable="d"
         Title="Отправитель" Height="150" MinHeight="150" Width="400" MinWidth="300" WindowStyle="ToolWindow">
     <d:Window.DataContext>
