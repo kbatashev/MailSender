@@ -170,6 +170,9 @@
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <Image Source="Resources/Psyduck.png" Height="24" Width="38"/>
+            </StatusBarItem>
             <TextBlock Text="Status bar"/>
         </StatusBar>
     </Grid>
