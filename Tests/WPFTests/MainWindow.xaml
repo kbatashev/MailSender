@@ -4,58 +4,173 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
-        mc:Ignorable="d">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
-        <MenuItem Header="Файл">
-            <MenuItem Header="Создать"/>
-            <MenuItem Header="Открыть"/>
-            <MenuItem Header="Сохранить"/>
-            <Separator/>
-            <MenuItem Header="Выход" Click="ExitMenuItem_OnClick"/>
-        </MenuItem>
-        <MenuItem Header="Сервис">
-            <MenuItem Header="Параметры" IsEnabled="False"/>
-        </MenuItem>
-        <MenuItem Header="Помощь">
-            <MenuItem Header="О программе" IsEnabled="False"/>
-        </MenuItem>
-    </Menu>
-    <TabControl>
-        <TabItem Header="Формирование рассылки">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                    <RowDefinition Height="10*" MinHeight="30"/>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                    <RowDefinition Height="3*" MinHeight="30"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="Пользователь"/>
-                <TextBox Grid.Row="0" Grid.Column="2" Name="UserNameEditor"/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="Пароль отправителя"/>
-                <PasswordBox Grid.Row="1" Grid.Column="2" Name="PasswordEditor"/>
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="Тема письма"/>
-                <TextBox Grid.Row="2" Grid.Column="2" Name="SubjectEditor" Text="Введите вашу тему письма"/>
-                <TextBlock Grid.Row="3" Grid.Column="1" Text="Текст письма"/>
-                <TextBox Grid.Row="3" Grid.Column="2" Name="MessageEditor" Text="Введите ваш текст письма"/>
-                <Button 
-                        Grid.Row="5" Grid.Column="1"
-                        Content="Отправить письмо"
-                        Name="SendMailButton"
-                        Click="SendMailButton"
-                        />
-            </Grid>
-        </TabItem>
-        
-    </TabControl>
-    </DockPanel>
+        xmlns:data="clr-namespace:MailSender.Lib.Data;assembly=MailSender.Lib"
+        xmlns:entities="clr-namespace:MailSender.Lib.Entities;assembly=MailSender.Lib"
+        mc:Ignorable="d"
+        Title="WpfMailSender" Height="450" Width="800">
+    <d:Window.DataContext>
+        <local:MainWindow />
+    </d:Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="entities:Sender" x:Key="SenderTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Address}" Opacity="50"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Margin="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл"></MenuItem>
+            <MenuItem Header="Сервис"></MenuItem>
+            <MenuItem Header="Помощь"></MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Рассылка">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ToolBarTray Grid.Row="0">
+                        <ToolBar Header="Отправители">
+                            <ComboBox x:Name="CbSenders" Width="200"  SelectedIndex="0"
+                                      ItemsSource="{x:Static data:TestData.Senders}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="entities:Sender">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,5,0"/>
+                                            <TextBlock Text="{Binding Address}" Opacity="0.5"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button ToolTip="Добавить">
+                                <Image Source="Resources/Add_16x.png"/>
+                            </Button>
+                            <Button ToolTip="Удалить">
+                                <Image Source="Resources/Remove_16x.png"/>
+                            </Button>
+                            <Button ToolTip="Изменить" Click="ButtonEditSender_OnClick">
+                                <Image Source="Resources/Edit_16x.png"/>
+                            </Button>
+                        </ToolBar>
+                        <ToolBar Header="Серверы">
+                            <ComboBox x:Name="CbServers" Width="200"  SelectedIndex="0"
+                                      ItemsSource="{x:Static data:TestData.Servers}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="entities:Server">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="0,0,5,0"/>
+                                            <TextBlock Text="{Binding Address}" Opacity="0.5"/>
+                                            <TextBlock Text=":" Opacity="0.5"/>
+                                            <TextBlock Text="{Binding Port}" Opacity="0.5"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Button ToolTip="Add">
+                                <Image Source="Resources/Add_16x.png"/>
+                            </Button>
+                            <Button ToolTip="Del">
+                                <Image Source="Resources/Remove_16x.png"/>
+                            </Button>
+                            <Button ToolTip="Edit">
+                                <Image Source="Resources/Edit_16x.png"/>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <GroupBox Grid.Row="1" Header="Получатели">
+                        <DataGrid x:Name="DgRecipients"
+                                  ItemsSource="{x:Static data:TestData.Recipients}" 
+                                  AutoGenerateColumns="False" IsReadOnly="True"
+                                  GridLinesVisibility="None"
+                                  VerticalScrollBarVisibility="Visible"
+                                  AlternatingRowBackground="Gainsboro">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Планировщик">
+                <DockPanel>
+                    <GroupBox Header="Управление">
+                        <StackPanel>
+                            <Calendar DisplayMode="Month" Margin="1"/>
+                            <Button HorizontalContentAlignment="Stretch" Margin="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image DockPanel.Dock="Left" Height="16" Source="Resources/Time_16x.png" Margin="5,0"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="Запланировать"/>
+                                </StackPanel>
+                            </Button>
+                            <Button HorizontalContentAlignment="Stretch" Margin="1" Click="ButtonSend_OnClick">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image DockPanel.Dock="Left" Height="16" Source="Resources/SendEmail_16x.png" Margin="5,0"/>
+                                    <TextBlock HorizontalAlignment="Center" Text="Отправить"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Задания">
+                        <ListBox>
+                        </ListBox>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Письма">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="150" MaxWidth="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Список писем">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ListBox Grid.Row="0">
+                                <ListBoxItem>Письмо 1</ListBoxItem>
+                                <ListBoxItem>Письмо 2</ListBoxItem>
+                                <ListBoxItem>Письмо 3</ListBoxItem>
+                                <ListBoxItem>Письмо 4</ListBoxItem>
+                                <ListBoxItem>Письмо 5</ListBoxItem>
+                            </ListBox>
+                            <UniformGrid Grid.Row="1" Rows="1">
+                                <Button>Add</Button>
+                                <Button>Del</Button>
+                            </UniformGrid>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="Выбранное письмо">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <GroupBox Grid.Row="0" Header="Тема письма">
+                                <TextBox x:Name="TbMessageSubject" Text="Проверка MailSender"/>
+                            </GroupBox>
+                            <GroupBox Grid.Row="1" Header="Текст письма">
+                                <TextBox x:Name="TbMessageText" Text="Это письмо отправлено приложением MailSender"
+                                         AcceptsReturn="True" TextWrapping="Wrap" 
+                                         VerticalScrollBarVisibility="Visible"/>
+                            </GroupBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="2">
+            <TextBlock Text="Status bar"/>
+        </StatusBar>
+    </Grid>
 </Window>

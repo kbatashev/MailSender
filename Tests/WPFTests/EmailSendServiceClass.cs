@@ -4,25 +4,18 @@ using System.Security;
 
 namespace MailSender
 {
-    public sealed class EmailSendServiceClass
+    public static class EmailSendServiceClass
     {
-        public void Send(string mailUser, SecureString mailPassword)
+        public static void SendMail(string from, string to, string subject, string body, MailServerInfo server, string username, SecureString password)
         {
-            try
+            using (var msg = new MailMessage(from, to, subject, body) { IsBodyHtml = false })
             {
-                using (var message = new MailMessage(SendMailUserInfo.EmailFrom, SendMailUserInfo.EmailTo, SendMailUserInfo.EmailSubject, SendMailUserInfo.EmailBody))
-                using (var client = new SmtpClient(SendMailUserInfo.Server)
+                using (var client = new SmtpClient(server.HostName, server.Port))
                 {
-                    EnableSsl = true,
-                    Credentials = new NetworkCredential(mailUser, mailPassword)
-                })
-                {
-                    client.Send(message);
+                    client.EnableSsl = true;
+                    client.Credentials = new NetworkCredential(username, password);
+                    client.Send(msg);
                 }
-            }
-            catch(SmtpException error)
-            {
-                throw new SmtpException(error.Message);
             }
         }
     }
