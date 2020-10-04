@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MailSender.Lib\MailSender.Lib.csproj" />
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="3.6.0" />
   </ItemGroup>
 
 </Project>
