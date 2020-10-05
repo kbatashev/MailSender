@@ -1,12 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using MailSender.Interfaces;
 using MailSender.Lib.Data;
 using MailSender.Lib.Entities;
-using MailSender.MVVM;
+
 
 namespace MailSender.Services
 {
-    public class DebugServersStore : IStore<Server>
+    public class DebugServersStore : DebugStore<Server>, IServersStore
     {
-        public IEnumerable<Server> Items => TestData.Servers;
+        public DebugServersStore() : base(TestData.Servers)
+        {
+
+        }
+
+        public override void Update(int id, Server server)
+        {
+            var dbSerber = GetById(id);
+            if (dbSerber == null)
+                return;
+
+            dbSerber.Name = server.Name;
+            dbSerber.Address = server.Address;
+            dbSerber.Port = server.Port;
+            dbSerber.UseSSL = server.UseSSL;
+            dbSerber.Login = server.Login;
+            dbSerber.Password = server.Password;
+        }
     }
 }

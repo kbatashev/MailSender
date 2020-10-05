@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace MailSender.Views
 {
-    public partial class RecipientsView : UserControl
+    public partial class RecipientsControl : UserControl
     {
-        public RecipientsView()
+        public RecipientsControl()
         {
             InitializeComponent();
         }

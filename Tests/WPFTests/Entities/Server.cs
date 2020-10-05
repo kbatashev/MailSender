@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MailSender.Entities;
 
 namespace MailSender.Lib.Entities
 {
-    public class Server
+    public class Server: Entity
     {
         public string Name { get; set; }
         public string Address { get; set; }
