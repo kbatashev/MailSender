@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using MailSender.Lib.Entities;
-using MailSender.MVVM;
+using MailSender.Interfaces;
+
 
 namespace MailSender.Services
 {
-    public class RecipientsManager : DataManager<Recipient>
+    public class RecipientsManager : IRecipientsManager
     {
         private readonly IStore<Recipient> _recipientsStore;
 
         public RecipientsManager(IStore<Recipient> recipientsStore) => _recipientsStore = recipientsStore;
 
-        public override IEnumerable<Recipient> Read() => _recipientsStore?.Items;
+        public IEnumerable<Recipient> Read() => _recipientsStore?.GetItems();
 
-        public override void Add(Recipient item) => throw new NotImplementedException();
+        public void Add(Recipient item) =>
+            Debug.WriteLine($"RecipientsManager.Create Id = {item.Id}, Name = {item.Name}, Address = {item.Address}");
 
-        public override void Update(Recipient item) => throw new NotImplementedException();
+        public void Update(Recipient item) =>
+            Debug.WriteLine($"RecipientsManager.Update Id = {item.Id}, Name = {item.Name}, Address = {item.Address}");
 
-        public override void Delete(Recipient item) => throw new NotImplementedException();
+        public void Delete(Recipient item) =>
+            Debug.WriteLine($"RecipientsManager.Delete Id = {item.Id}, Name = {item.Name}, Address = {item.Address}");
+
     }
 }

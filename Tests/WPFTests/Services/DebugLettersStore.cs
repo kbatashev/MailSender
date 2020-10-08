@@ -1,12 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using MailSender.Interfaces;
 using MailSender.Lib.Data;
 using MailSender.Lib.Entities;
-using MailSender.MVVM;
+
 
 namespace MailSender.Services
 {
-    public class DebugLettersStore : IStore<Letter>
+    public class DebugLettersStore : DebugStore<Letter>, ILettersStore
     {
-        public IEnumerable<Letter> Items => TestData.Letters;
+        public DebugLettersStore() : base(TestData.Letters)
+        {
+
+        }
+
+        public override void Update(int id, Letter letter)
+        {
+            var dbLetter = GetById(id);
+            if (dbLetter == null)
+                return;
+
+            dbLetter.Subject = letter.Subject;
+            dbLetter.Body = letter.Body;
+        }
     }
 }

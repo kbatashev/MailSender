@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MailSender.Entities;
 
 namespace MailSender.Lib.Entities
 {
-    public class Recipient
+    public class Recipient: PersonEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
         public override string ToString() => Name;
     }
 }
